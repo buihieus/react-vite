@@ -4,9 +4,9 @@
 }
 .todo-title{
     color: red;
-    font-size: 20px;
+    font-size: 50px;
     text-align: center;
-
+    padding: 100 100px;
 }
 
 .todo-new{
