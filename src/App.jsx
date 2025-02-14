@@ -24,10 +24,19 @@ const App = () => {
     }
   }
   const addNewTodo = (name) => {
-    // dấu backtick ``
-    alert (`call me ${name}`); 
+    const newTodo = {
+      id: randomIntFromInterval(1, 10000000),
+      name: name
+    }
+
+    // array.push
+    setTodoList([...todoList, newTodo]); // cai nay can xem lai ...todoList là copy lại cái data của todolist
   }
-  // addNewTodo();
+
+  const randomIntFromInterval = (min, max) => { // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
   return (
     <div className="Todo-Container">
       <div className="todo-title">Todo List</div>
