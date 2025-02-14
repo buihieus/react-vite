@@ -1,19 +1,19 @@
+import { useState } from "react";
 const TodoNew =(props) => {
-    console.log(">>> check point: ",props)
+    // UseState hook
+    // const valueInput = "hieu";
+    const [valueInput,setValueInput] = useState("hieu");
+    // hoặc viết như này const [valueInput,setValueInput] = React.useState("hieu");
+
     const {addNewTodo} = props;
-    // addNewTodo("Hieu");
 
     const handleClick = () => {
-        alert("click me");
+        console.log(">>> check valueInput: ", valueInput);
     }
     const handleOnChange = (name) => {
-        console.log(">>> handleOnChange",name);
-        // event.target là trỏ đến cái input ( dòng 14) .value là gtri của ô input
+        // console.log(">>> handleOnChange",name);
+        setValueInput(name);
     }
-    // const handleOnChange = (event) => {
-    //     console.log(">>> handleOnChange",event.target.value);
-    //     // event.target là trỏ đến cái input ( dòng 14) .value là gtri của ô input
-    // }
     return (
         <div className='todo-new'>
             <input type="text" 
@@ -23,6 +23,9 @@ const TodoNew =(props) => {
                 {cursor: "pointer"}}
                 onClick={handleClick}
             >Add</button>
+            <div>
+                My text input is : {valueInput}
+            </div>
         </div>
     )
 }

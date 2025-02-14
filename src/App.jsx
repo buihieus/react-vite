@@ -2,8 +2,15 @@ import './components/todo/todo.css'
 import TodoNew from './components/todo/TodoNew'
 import TodoData from './components/todo/TodoData'
 import reactLogo from './assets/react.svg'
+import { useState } from "react";
 
 const App = () => {
+  // bien nay dua vao react de quan ly
+  const [todoList, setTodoList] = useState([
+    {id:1, name: "Hieu dep trai", age: 25},
+    {id:2, name: "Hieu ", age: 22},
+    {id:3, name: "Hieu bui", age: 18}
+  ]);
   //{key:value}
   const buihieu = "hieu dep trai vai lua";
   const age = 25;
@@ -32,7 +39,7 @@ const App = () => {
       name = {buihieu}
       age = {age}
       data = {data}
-
+      todoList = {todoList}
       />
       <div className='todo-image'>
       <img src={reactLogo} className='logo' />
