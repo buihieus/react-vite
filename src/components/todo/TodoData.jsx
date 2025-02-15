@@ -1,18 +1,17 @@
-// props là properties và là 1 biến object khi muốn truy xuất dlieu can phai theo cú pháp : props.tenthuotinh
-// props là 12 object 
 const TodoData =(props) => {
-    const {name,age,data}=props;
-    // hoặc viết như này cũng đc
-    //const name = props.name;
-    // const age = props.age;
-    // const data = props.data;
-    
-    console.log(">> check props: ",props);
+    const {todoList}=props;
+    console.log(">> check props: ",todoList);
     return (
         <div className="todo-data">
-            <div>My name is {name}</div>
-            <div>Learning react</div>
-            <div>watch video</div>
+                {todoList.map((item,index)=>{
+                    console.log(">> check item: ",item,index);
+                    return(
+                    <div className="todo-item">
+                        <div>{item.name}</div>
+                        <button>Delete</button>
+                    </div>)
+
+                })}
             <div>
                 {JSON.stringify(props.todoList)}
             </div>
