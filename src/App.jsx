@@ -33,13 +33,28 @@ const App = () => {
        // đặt tên như nào giá trị như vậy va cai duoi la dang truyen tham chieu thoi (nhu this trong c,java) thêm () dang sau moi la goi ham
        addNewTodo={addNewTodo}
       />
-      <TodoData
-      todoList = {todoList}
+      {/* // toán tử điều kiện */}
+      {todoList.length>0 ?
+        <TodoData
+        todoList = {todoList}
       />
+      :
       <div className='todo-image'>
-      <img src={reactLogo} className='logo' />
+        <img src={reactLogo} className='logo' />
       </div>
+      }
+      {/* {      todoList.length>0 &&
+        <TodoData
+        todoList = {todoList}
+        />}
+        
+      {todoList.length === 0 &&
+            <div className='todo-image'>
+              <img src={reactLogo} className='logo' />
+            </div>
+    } */}
     </div>
+
   )
 }
 
