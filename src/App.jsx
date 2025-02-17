@@ -27,7 +27,7 @@ const App = () => {
     }
   const deleteTodo = (id) => {
     const newTodo = todoList.filter(item => item.id !== id);
-    setTodoList(newTodo);
+    setTodoList(newTodo);                              
   }
   return (
     <div className="Todo-Container">
