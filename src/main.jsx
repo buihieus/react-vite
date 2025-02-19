@@ -20,6 +20,17 @@ const router = createBrowserRouter([
     {
     path: "/",
     element: <App /> ,
+    // Nested Routes với outlet
+    children: [
+      {
+        path: "/user",
+        element: <UserPage/>,
+      },
+      {
+        path: "/products",
+        element: <ProductPage/>,
+      }
+    ]
     },
     {
       path: "/login",
@@ -28,15 +39,8 @@ const router = createBrowserRouter([
     {
       path: "/register",
       element:<RegisterPage/>,
-    },
-    {
-      path: "/user",
-      element: <UserPage/>,
-    },
-    {
-      path: "/products",
-      element: <ProductPage/>,
     }
+   
   ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
