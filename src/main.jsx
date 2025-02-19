@@ -16,12 +16,19 @@ import ProductPage from './pages/product.jsx';
 
 import './style/global.css';
 
+import TodoApp from './components/todo/TodoApp';
+
+
 const router = createBrowserRouter([
     {
     path: "/",
     element: <App /> ,
     // Nested Routes với outlet
     children: [
+      {
+        index: true,
+        element: <TodoApp/>
+      },
       {
         path: "/user",
         element: <UserPage/>,
