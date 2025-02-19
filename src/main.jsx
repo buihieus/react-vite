@@ -13,7 +13,8 @@ import RegisterPage from './pages/register.jsx';
 import UserPage from './pages/user.jsx';
 
 import ProductPage from './pages/product.jsx';
-import './styles/global.css';
+
+import './style/global.css';
 
 const router = createBrowserRouter([
     {
@@ -42,3 +43,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </React.StrictMode>,
 )
+// router chuyen huong trang
