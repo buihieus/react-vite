@@ -1,6 +1,7 @@
-import {Button, Input} from "antd"
+import {Button, Input,notification} from "antd"
 import { useState } from "react";
-import axios from "axios";
+import { createUserAPI } from "../../services/api.service";
+
 const UserForm = () => {
     const [fullName,setFullName] = useState("");
     const [email,setEmail] = useState("");
@@ -9,18 +10,47 @@ const UserForm = () => {
 
     // console.log(">> check form: ", fullName, email, password, phone);
 
-    const handleClickBtn = (event) => {
-        const URL_BACKEND="http://localhost:8080/api/v1/user";
-        const data = {
-            // DINH DANG CUA NO LA 1 BIEN OBJECTS
-            fullName: fullName,
-            email: email,
-            password: password,
-            phone: phone
+    const handleClickBtn = async () => {
+        const res = await createUserAPI(fullName, email, password, phone);
+        // console.log(">> check res: ", res);
+        if (res.data){
+        // antd nó có hỗ trợ notification
+        notification.success({
+            message: "create user",
+            description:"tạo mới thành công"  
+        });
+        } else {
+            notification.error({
+                message: "Create User",
+                description: JSON.stringify(res.message)
+            });
         }
-        axios.post(URL_BACKEND, data);
-        console.log(">> check state: ", {fullName, email, password, phone});
     }
+    // const handleClickBtn = async () => {
+    //     try {
+    //         const res = await createUserAPI(fullName, email, password, phone);
+    //         console.log(">> check res: ", res);
+    
+    //         if (res && res.data) {
+    //             notification.success({
+    //                 message: "Create User",
+    //                 description: "Tạo mới thành công"
+    //             });
+    //         } else {
+    //             notification.error({
+    //                 message: "Create User",
+    //                 description: "Có lỗi xảy ra, vui lòng thử lại!"
+    //             });
+    //         }
+    //     } catch (error) {
+    //         console.error(">> Error: ", error);
+    //         notification.error({
+    //             message: "Lỗi",
+    //             description: "Không thể tạo người dùng. Vui lòng kiểm tra lại."
+    //         });
+    //     }
+    // };
+    
     return (
         <div className="user-form" style={{margin: "20px 0"}}>
             <div style={{display: "flex",gap: "15px ", flexDirection: "column"}}>
