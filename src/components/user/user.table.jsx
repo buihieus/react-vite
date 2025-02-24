@@ -1,10 +1,14 @@
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Table} from 'antd';
 import UpdateUserModal from './update.user.modal';
+import { useState } from 'react';
    
   const UserTable = (props) => {
     const {dataUsers} = props;
-    
+
+    const[isModalUpdateOpen, SetIsModalUpdateOpen] = useState(false);
+    const[dataUpdate, SetDataUpdate] = useState(null);
+
     const columns = [
       {
         title: 'Id',
@@ -33,14 +37,19 @@ import UpdateUserModal from './update.user.modal';
           key: '_id',
           render: (_, record) => (
             <div style ={{display: "flex", gap: "20px"}}>
-              <EditOutlined style={{cursor: "pointer", color: "orange"}} />
+              <EditOutlined 
+                onClick={()=> {
+                  // console.log(">> check record: ", record);
+                  SetDataUpdate(record);
+                  SetIsModalUpdateOpen(true);
+                }}
+                style={{cursor: "pointer", color: "orange"}} />
               <DeleteOutlined style={{cursor: "pointer", color: "red"}}/>
             </div>
           ),
         },
     ];
     
-
     return (
       <>
         <Table
@@ -48,7 +57,12 @@ import UpdateUserModal from './update.user.modal';
         dataSource={dataUsers} 
         rowKey ={"_id"}
         />
-      <UpdateUserModal/>
+        <UpdateUserModal
+          isModalUpdateOpen={isModalUpdateOpen}
+          setIsModalUpdateOpen={SetIsModalUpdateOpen}
+          dataUpdate={dataUpdate}
+          setDataUpdate={SetDataUpdate}
+        />
       </>
     )
 }
