@@ -1,13 +1,15 @@
 import { useState } from "react";
-import {Input,notification,Modal} from "antd" 
+import {Input,notification,Modal,Popconfirm} from "antd" 
 import { useEffect } from "react";
-const UpdateUserModal = (props) => { 
+import { deleteUserAPI } from "../../services/api.service";
+const DeleteUserModal = (props) => { 
         const [id,setId] = useState("");
         const [fullName,setFullName] = useState("");
         const [phone,setPhone] = useState("");
        
         
-        const{isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate} = props;
+        const{isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate,
+            loadUsers} = props;
 
         // next dataUpdate != prev dataUpdate
         useEffect(()=>{
@@ -19,16 +21,17 @@ const UpdateUserModal = (props) => {
             }
         },[dataUpdate])
         const handleSubmitBtn = async () => {
-            const res = await createUserAPI(fullName, email, password, phone);
+            const res = await updateUserAPI(id, fullName,  phone);
             // console.log(">> check res: ", res);
             if (res.data){
             // antd nó có hỗ trợ notification
             notification.success({
-                message: "create user",
-                description:"tạo mới thành công"  
+                message: "update user",
+                description:"cập nhật thành công"  
             });
             // đóng modal 
             resetAndCloseModal();
+            await loadUsers();
             // await loadUsers();
             } else {
                 notification.error({
@@ -44,7 +47,7 @@ const UpdateUserModal = (props) => {
             setFullName("");
           
             setPhone("");
-            // cái này để khi tắt đi bật lại update nó sẽ ko bị kiểu như là ko hiện dưu liệu
+            // cái này để khi tắt đi bật lại update nó sẽ ko bị kiểu như là ko hiện dữ liệu
             setDataUpdate(null);
         }    
     return (
@@ -90,5 +93,5 @@ const UpdateUserModal = (props) => {
     )
 }
 
-export default UpdateUserModal;
+export default DeleteUserModal;
 // tự sửa cái update này đi
