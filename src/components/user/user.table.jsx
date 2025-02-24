@@ -1,7 +1,9 @@
+// đây là nơi có data của ng dùng
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Table} from 'antd';
 import UpdateUserModal from './update.user.modal';
 import { useState } from 'react';
+import ViewUserDetail from './view.user.detail';
    
   const UserTable = (props) => {
     const {dataUsers,loadUsers} = props;
@@ -9,13 +11,22 @@ import { useState } from 'react';
     const[isModalUpdateOpen, SetIsModalUpdateOpen] = useState(false);
     const[dataUpdate, SetDataUpdate] = useState(null);
 
+    const [dataDetail,setDataDetail] = useState(null);
+    const [isDetailOpen, setIsDetailOpen] = useState(false);
+
     const columns = [
       {
         title: 'Id',
         key: '_id',
         render: (_, record) => {
+
           return(
-            <a href='#' > {record._id}</a>
+            <a href='#' 
+              onClick={() => {
+                setDataDetail(record);
+                setIsDetailOpen(true);
+              }}
+            > {record._id}</a>
           
         )},
       },
@@ -63,6 +74,14 @@ import { useState } from 'react';
           dataUpdate={dataUpdate}
           setDataUpdate={SetDataUpdate}
           loadUsers={loadUsers}
+        />
+
+        <ViewUserDetail
+          dataDetail={dataDetail}
+          isDetailOpen={isDetailOpen}
+          setIsDetailOpen={setIsDetailOpen}
+          setDataDetail={setDataDetail}
+ 
         />
       </>
     )
