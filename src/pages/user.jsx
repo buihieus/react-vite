@@ -11,21 +11,23 @@ const UserPage = () => {
   useEffect(() => {
 
     loadUsers();
-  }, []);
+  }, [current,pageSize]); // [] + condition (no se render ra phan tu rong + dieu kien)
   const loadUsers = async () => {
     // Fetch data from API here
     const res = await fetchAllUserAPI(current,pageSize);
     if(res.data){
     // setDataUsers(res.data);
-    setDataUsers(res.data.result);
+    setDataUsers(res.data.result);    // sao lai .result thi no het loi rawData.some is not function nhi
     setCurrent(res.data.meta.current);
     setPageSize(res.data.meta.pageSize);
     setTotal(res.data.meta.total);
 
   }
-    // sao lai .result thi no het loi rawData.some is not function nhi
-    console.error("API không trả về data.result đúng định dạng:", res);
+
   }
+  // console.log("check current",current);
+  console.log("check pageSize",pageSize);
+
   return (
     <div style={{ padding: "20px" }}>
 

@@ -8,9 +8,9 @@ import { deleteUserAPI } from '../../services/api.service';
 
 const UserTable = (props) => {
   const { dataUsers, loadUsers,
-    current,pageSize,total,
-    setCurrent,setPageSize
-   } = props;
+    current, pageSize, total,
+    setCurrent, setPageSize
+  } = props;
 
   const [isModalUpdateOpen, SetIsModalUpdateOpen] = useState(false);
   const [dataUpdate, SetDataUpdate] = useState(null);
@@ -25,7 +25,7 @@ const UserTable = (props) => {
         console.log("check index", index)
         return (
           <>
-            {index + 1}
+            {(index + 1)+(current-1)*pageSize}
           </>
         )
       },
@@ -103,9 +103,23 @@ const UserTable = (props) => {
     }
 
   }
-  const onChange = (pagination, filters, sorter, extra) => { 
-    console.log("check",pagination, filters, sorter, extra)
-   }; 
+  const onChange = (pagination, filters, sorter, extra) => {
+    //setCurrent,setPageSize
+    //neu thay doi trang : current
+    if (pagination && pagination.current) {
+      if (pagination.current !== current) {
+        setCurrent(+pagination.current)  // "5" => 5 tu string sang number
+      }
+    }
+
+    //neu thay doi tong so phan tu : pageSize
+    if (pagination && pagination.pageSize) {
+      if (pagination.pageSize !== pageSize) {
+        setPageSize(+pagination.pageSize)  // "5" => 5 tu string sang number
+      }
+    }
+    console.log("check", pagination, filters, sorter, extra)
+  };
   return (
     <>
       <Table
@@ -120,7 +134,7 @@ const UserTable = (props) => {
             total: total,
             showTotal: (total, range) => { return (<div> {range[0]}-{range[1]} trên {total} rows</div>) }
           }}
-          onChange={onChange}
+        onChange={onChange}
       />
       <UpdateUserModal
         isModalUpdateOpen={isModalUpdateOpen}
