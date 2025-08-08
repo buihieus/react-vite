@@ -72,10 +72,10 @@ const RegisterPage = () => {
                         name="password"
                         rules={[{ required: true, message: 'Please input your password!' },
                             // use regex 
-                            // {
-                            //     pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,}$/,
-                            //     message: 'Mật khẩu phải ≥6 ký tự, có chữ hoa, chữ thường, số và ký tự đặc biệt.'
-                            // }
+                            {
+                                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,}$/,
+                                message: 'Mật khẩu phải ≥6 ký tự, có chữ hoa, chữ thường, số và ký tự đặc biệt.'
+                            }
                         ]}
                     >
                         <Input.Password />
