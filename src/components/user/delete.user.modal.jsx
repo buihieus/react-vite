@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {Input,notification,Modal,Popconfirm} from "antd" 
 import { useEffect } from "react";
-import { deleteUserAPI } from "../../services/api.service";
+import { deleteUserAPI, updateUserAPI } from "../../services/api.service";
 const DeleteUserModal = (props) => { 
         const [id,setId] = useState("");
         const [fullName,setFullName] = useState("");
@@ -13,7 +13,7 @@ const DeleteUserModal = (props) => {
 
         // next dataUpdate != prev dataUpdate
         useEffect(()=>{
-            console.log(">> check data update: ",dataUpdate);
+            // console.log(">> check data update: ",dataUpdate);
             if(dataUpdate){
                 setId(dataUpdate._id);
                 setFullName(dataUpdate.fullName);

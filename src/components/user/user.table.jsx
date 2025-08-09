@@ -118,7 +118,7 @@ const UserTable = (props) => {
         setPageSize(+pagination.pageSize)  // "5" => 5 tu string sang number
       }
     }
-    console.log("check", pagination, filters, sorter, extra)
+    // console.log("check", pagination, filters, sorter, extra)
   };
   return (
     <>

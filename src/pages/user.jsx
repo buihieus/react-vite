@@ -26,7 +26,7 @@ const UserPage = () => {
 
   }
   // console.log("check current",current);
-  console.log("check pageSize",pageSize);
+  // console.log("check pageSize",pageSize);
 
   return (
     <div style={{ padding: "20px" }}>
