@@ -1,23 +1,27 @@
 import { Form, Input, Button, Card, Divider, notification, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "../services/api.service";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../components/context/auth.contex";
 
 const LoginPage = () => {
     const navigate = useNavigate();
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(false);
+    const {setUser} = useContext(AuthContext);
     // const onFinish = (values) => {
     //     console.log("Login Data:", values);
     //     // Sau khi đăng nhập thành công thì chuyển sang homepage
     //     navigate("/");
     // };
     const onFinish = async (values) => {
-        console.log("Login Data:", values);
+        // console.log("Login Data:", values);
         // Sau khi đăng nhập thành công thì chuyển sang homepage
         setLoading(true)
         const res = await loginAPI(values.email, values.password);
         if (res.data) {
             message.success("dang nhap thanh cong");
+            localStorage.setItem("access_token",res.data.access_token)
+            setUser(res.data.user);
             navigate("/");
         } else {
             notification.error({
