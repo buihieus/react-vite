@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import { RouterProvider } from 'react-router-dom';
 
 export const AuthContext = createContext({
     email: "",
@@ -22,5 +23,10 @@ export const AuthWrapper = (props) => {
         <AuthContext.Provider value={{ user, setUser }}>
             {props.children}
         </AuthContext.Provider>
+        //  giong cai duoi
+        // < AuthContext >
+        //     <RouterProvider router={router} /> 
+        // </AuthContext >
+
     )
 }

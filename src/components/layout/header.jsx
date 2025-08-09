@@ -1,13 +1,13 @@
 import { Link, NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
-import { UserOutlined, HomeOutlined, BookOutlined, LoginOutlined, LogoutOutlined, DoubleRightOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserOutlined, HomeOutlined, BookOutlined, LoginOutlined, LogoutOutlined, DoubleRightOutlined, SettingOutlined, AliwangwangOutlined } from '@ant-design/icons';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../context/auth.contex';
 const Header = () => {
   const [current, setCurrent] = useState('mail');
 
-  const {user} = useContext(AuthContext)
-  console.log ("check data :",user)
+  const { user } = useContext(AuthContext)
+  console.log("check data :", user)
 
   const onClick = (e) => {
     console.log('click ', e);
@@ -29,28 +29,41 @@ const Header = () => {
       key: 'books',
       icon: <BookOutlined />,
     },
-    {
-      label: 'Setting',
-      key: 'SubMenu',
-      icon: <SettingOutlined />,
-      children: [
-        {
-          label: <Link to={"/register"}>Register</Link>,
-          key: 'users',
-          icon: <DoubleRightOutlined />
-        },
-        {
-          label: <Link to={"/login"}>Login</Link>,
-          key: 'users',
-          icon: <LoginOutlined />
-        },
-        {
-          label: <Link to={"/logout"}>Logout</Link>,
-          key: 'users',
-          icon: <LogoutOutlined />
-        },
-      ]
-    }
+    ...(!user.id ? [{ 
+            label: <Link to={"/login"}>Đăng nhập</Link>, 
+            key: 'login', 
+            icon: <LoginOutlined />, 
+        }] : []), 
+ 
+        ...(user.id ? [{ 
+            label: `Welcome ${user.fullName}`, 
+            key: 'setting', 
+            icon: <AliwangwangOutlined />, 
+            children: [ 
+                { 
+                    label: 'Đăng xuất', 
+                    key: 'logout', 
+                }, 
+            ], 
+        }] : []),
+
+    // {
+    //   label: `welcome ${user.fullName}`,
+    //   key: 'SubMenu',
+    //   icon: <SettingOutlined />,
+    //   children: [
+    //     {
+    //       label: <Link to={"/register"}>Register</Link>,
+    //       key: 'users',
+    //       icon: <DoubleRightOutlined />
+    //     },
+    //     {
+    //       label: <Link to={"/logout"}>Logout</Link>,
+    //       key: 'users',
+    //       icon: <LogoutOutlined />
+    //     },
+    //   ]
+    // }
   ];
   //anchor
   return (
