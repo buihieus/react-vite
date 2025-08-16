@@ -12,6 +12,7 @@ const UserPage = () => {
 
     loadUsers();
   }, [current,pageSize]); // [] + condition (no se render ra phan tu rong + dieu kien)
+  
   const loadUsers = async () => {
     // Fetch data from API here
     const res = await fetchAllUserAPI(current,pageSize);

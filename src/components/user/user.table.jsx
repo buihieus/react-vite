@@ -22,7 +22,7 @@ const UserTable = (props) => {
     {
       title: 'STT',
       render: (_, record, index) => {
-        console.log("check index", index)
+        // console.log("check index", index)
         return (
           <>
             {(index + 1)+(current-1)*pageSize}
@@ -60,8 +60,8 @@ const UserTable = (props) => {
     },
     //cai nay cho phep customize user
     {
-      title: 'Id',
-      key: '_id',
+      title: 'Action',
+      key: 'action',
       render: (_, record) => (
         <div style={{ display: "flex", gap: "20px" }}>
           <EditOutlined
